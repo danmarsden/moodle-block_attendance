@@ -1,0 +1,7 @@
+This is ToDo's list from high priority to low:
+
+1. Migration to UTF [READY]
+2. Periods and multiply session on the same day [READY]
+3. Backuping [READY]
+4. Group mode (separated attendance for each group) [READY]
+5. Self taking attendance for students
