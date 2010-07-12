@@ -56,11 +56,14 @@ class block_attendance extends block_base {
 				foreach($statuses as $st) {
 					$this->content->text .= $st->description.':&nbsp;'.get_attendance($USER->id,$COURSE,$st->id).'<br />';
 				}
-				$percent = get_percent($USER->id, $COURSE);
-				$grade   = get_grade($USER->id, $COURSE);
-				
-				$this->content->text .= get_string('attendancepercent','attforblock').':&nbsp;'.$percent.'&nbsp;%<br />';
-				$this->content->text .= get_string('attendancegrade','attforblock').":&nbsp;$grade<br />";
+
+                if ($att->grade) {
+                    $percent = get_percent($USER->id, $COURSE);
+                    $grade   = get_grade($USER->id, $COURSE);
+
+                    $this->content->text .= get_string('attendancepercent','attforblock').':&nbsp;'.$percent.'&nbsp;%<br />';
+                    $this->content->text .= get_string('attendancegrade','attforblock').":&nbsp;$grade<br />";
+                }
 
 				$this->content->text .= '<a href="'.$CFG->wwwroot.'/mod/attforblock/view.php?id='.$cmid.'">'.get_string('indetail','attforblock').'</a>';
 			}
