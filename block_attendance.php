@@ -19,17 +19,19 @@ class block_attendance extends block_base {
         $this->content->footer = '';
         $this->content->text = '';
 		
-		if (!$att = array_pop(get_all_instances_in_course('attforblock', $COURSE, NULL, true))) {
+		$att = get_all_instances_in_course('attforblock', $COURSE, NULL, true);
+        if (count($att)==0) {
 			 $this->content->text = get_string('needactivity','block_attendance');;
 			 return $this->content;
 		}
-		$cmid = $att->coursemodule;
+        foreach ($att as $attinst) {
+		$cmid = $attinst->coursemodule;
 		require_once($CFG->dirroot.'/mod/attforblock/locallib.php');
 		
 	    if (!$context = get_context_instance(CONTEXT_MODULE, $cmid)) {
 	        print_error('badcontext');
 	    }
-	    
+        $this->content->text .= '<b>' . htmlentities($attinst->name) . '</b><br/>';
 		// link to attendance
 		if (has_capability('mod/attforblock:takeattendances', $context) or has_capability('mod/attforblock:changeattendances', $context)) {
 			$this->content->text .= '<a href="'.$CFG->wwwroot.'/mod/attforblock/manage.php?id='.$cmid.'&amp;from=block">'.get_string('takeattendance','attforblock').'</a><br />';
@@ -57,7 +59,7 @@ class block_attendance extends block_base {
 					$this->content->text .= $st->description.':&nbsp;'.get_attendance($USER->id,$COURSE,$st->id).'<br />';
 				}
 
-                if ($att->grade) {
+                if ($attinst->grade) {
                     $percent = get_percent($USER->id, $COURSE);
                     $grade   = get_grade($USER->id, $COURSE);
 
@@ -68,7 +70,7 @@ class block_attendance extends block_base {
 				$this->content->text .= '<a href="'.$CFG->wwwroot.'/mod/attforblock/view.php?id='.$cmid.'">'.get_string('indetail','attforblock').'</a>';
 			}
 		}
-		
+        }
 		return $this->content;
 	}
 }
