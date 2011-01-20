@@ -31,7 +31,7 @@ class block_attendance extends block_base {
 	    if (!$context = get_context_instance(CONTEXT_MODULE, $cmid)) {
 	        print_error('badcontext');
 	    }
-        $this->content->text .= '<b>' . format_string($attinst->name) . '</b><br/>';
+        $this->content->text .= '<b>' . format_string($attinst->name) . '</b><br />';
 		// link to attendance
 		if (has_capability('mod/attforblock:takeattendances', $context) or has_capability('mod/attforblock:changeattendances', $context)) {
 			$this->content->text .= '<a href="'.$CFG->wwwroot.'/mod/attforblock/manage.php?id='.$cmid.'&amp;from=block">'.get_string('takeattendance','attforblock').'</a><br />';
@@ -50,18 +50,18 @@ class block_attendance extends block_base {
 		}
 		
 		if (isstudent($COURSE->id) && has_capability('mod/attforblock:view', $context)) {
-			$complete = get_attendance($USER->id,$COURSE);
+			$complete = get_attendance($USER->id, $COURSE, $attinst);
 			if($complete == 0) {		//attendance not generated yet
 				$this->content->text .= get_string('attendancenotstarted','attforblock');
 			} else {					//attendance taken
-            	$statuses = get_statuses($COURSE->id);
+            	$statuses = get_statuses($attinst->id);
 				foreach($statuses as $st) {
-					$this->content->text .= $st->description.':&nbsp;'.get_attendance($USER->id,$COURSE,$st->id).'<br />';
+					$this->content->text .= $st->description.':&nbsp;'.get_attendance($USER->id,$COURSE,$attinst,$st->id).'<br />';
 				}
 
                 if ($attinst->grade) {
-                    $percent = get_percent($USER->id, $COURSE);
-                    $grade   = get_grade($USER->id, $COURSE);
+                    $percent = get_percent($USER->id, $COURSE, $attinst);
+                    $grade   = get_grade($USER->id, $COURSE, $attinst);
 
                     $this->content->text .= get_string('attendancepercent','attforblock').':&nbsp;'.$percent.'&nbsp;%<br />';
                     $this->content->text .= get_string('attendancegrade','attforblock').":&nbsp;$grade<br />";
@@ -70,6 +70,7 @@ class block_attendance extends block_base {
 				$this->content->text .= '<a href="'.$CFG->wwwroot.'/mod/attforblock/view.php?id='.$cmid.'">'.get_string('indetail','attforblock').'</a>';
 			}
 		}
+		$this->content->text .= "<br />";
         }
 		return $this->content;
 	}
