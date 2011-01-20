@@ -31,7 +31,7 @@ class block_attendance extends block_base {
 	    if (!$context = get_context_instance(CONTEXT_MODULE, $cmid)) {
 	        print_error('badcontext');
 	    }
-        $this->content->text .= '<b>' . htmlentities($attinst->name) . '</b><br/>';
+        $this->content->text .= '<b>' . format_string($attinst->name) . '</b><br/>';
 		// link to attendance
 		if (has_capability('mod/attforblock:takeattendances', $context) or has_capability('mod/attforblock:changeattendances', $context)) {
 			$this->content->text .= '<a href="'.$CFG->wwwroot.'/mod/attforblock/manage.php?id='.$cmid.'&amp;from=block">'.get_string('takeattendance','attforblock').'</a><br />';
