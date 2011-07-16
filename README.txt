@@ -82,10 +82,13 @@ RELEASE NOTES
 2.0.1 - 02 jul 2007 - Dmitry Pupinin [moodle.org member]
 * bug fixed: course id in block. Now using $COURSE
 
+2.4.0 - 16 jul 2011 - Artem Andreev [moodle.org member]
+* porting to Moodle 2.0
+
 --------
 ABOUT
 --------
-This is version 2.0.x of the attendance block. It is still IN DEVELOPMENT and should not be considered a stable release unless otherwise noted. It has been tested on Moodle 1.8+, MySQL and PHP 4.4+.
+This is version 2.4.x of the attendance block. It is still IN DEVELOPMENT and should not be considered a stable release unless otherwise noted. It has been tested on Moodle 1.8+, MySQL and PHP 4.4+.
 
 The attendance block was start development by the Human Logic Development Team, Dubai, UAE.
 Visit them online at www.human-logic.com

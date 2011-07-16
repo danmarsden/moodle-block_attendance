@@ -4,5 +4,6 @@
 
 $string['blockname'] = 'Attendance';
 $string['needactivity'] = 'This block can work only with an attendance activity. Please add the activity to this course.';
+$string['pluginname'] = 'Attendance';
 
 ?>
