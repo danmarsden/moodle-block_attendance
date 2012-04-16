@@ -16,3 +16,5 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 $plugin->version = 2011071600;
+$plugin->component = 'block_attendance';
+$plugin->dependencies = array('mod_attforblock' => ANY_VERSION);

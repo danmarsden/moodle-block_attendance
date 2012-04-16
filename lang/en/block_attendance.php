@@ -1,9 +1,19 @@
-<?PHP // $Id: block_attendance.php,v 1.7.2.1 2009/02/23 19:18:56 dlnsk Exp $ 
-      // block_attendance.php - created with Moodle 1.5.3+ (2005060230)
-
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 $string['blockname'] = 'Attendance';
 $string['needactivity'] = 'This block can work only with an attendance activity. Please add the activity to this course.';
 $string['pluginname'] = 'Attendance';
-
-?>
