@@ -4,5 +4,5 @@
 
 $string['blockname'] = 'Présence';
 $string['needactivity'] = 'Ce bloc fonctionne uniquement avec une activité Présence. Veuillez ajouter cette activité à ce cours.';
-
+$string['pluginname'] = 'Présence';
 ?>
