@@ -100,4 +100,8 @@ class block_attendance extends block_base {
 
         return $ret;
     }
+
+    function applicable_formats() {
+        return array('all' => true, 'my' => false, 'admin' => false, 'tag' => false);
+    }
 }
