@@ -14,29 +14,53 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Attendance Block
+ *
+ * @package    block_attendance
+ * @copyright  2011 Artem Andreev <andreev.artem@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Displays information about Attendance Module in this course.
+ * 
+ * @copyright  2011 Artem Andreev <andreev.artem@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class block_attendance extends block_base {
-	
-    function init() {
+
+    /**
+     * Set the initial properties for the block
+     */
+    public function init() {
         $this->title = get_string('blockname', 'block_attendance');
     }
-    
-	function get_content() {
-		global $CFG, $USER, $COURSE;
 
-		if ($this->content !== NULL) {
-			return $this->content;
-		}
-		
+    /**
+     * Gets the content for this block
+     *
+     * @return object $this->content
+     */
+    public function get_content() {
+        global $CFG, $USER, $COURSE;
+
+        if ($this->content !== null) {
+            return $this->content;
+        }
+
         $this->content = new stdClass;
         $this->content->footer = '';
         $this->content->text = '';
-		
-		$attendances = get_all_instances_in_course('attforblock', $COURSE, NULL, true);
+
+        $attendances = get_all_instances_in_course('attforblock', $COURSE, null, true);
         if (count($attendances)==0) {
-			 $this->content->text = get_string('needactivity', 'block_attendance');;
-			 return $this->content;
-		}
-        
+             $this->content->text = get_string('needactivity', 'block_attendance');;
+             return $this->content;
+        }
+
         require_once($CFG->dirroot.'/mod/attforblock/locallib.php');
         require_once($CFG->dirroot.'/mod/attforblock/renderhelpers.php');
 
@@ -49,10 +73,11 @@ class block_attendance extends block_base {
 
             $this->content->text .= html_writer::link($att->url_view(), html_writer::tag('b', format_string($att->name)));
             $this->content->text .= html_writer::empty_tag('br');
-            
-            // link to attendance
+
+            // Link to attendance.
             if ($att->perm->can_take() or $att->perm->can_change()) {
-                $this->content->text .= html_writer::link($att->url_manage(array('from' => 'block')), get_string('takeattendance', 'attforblock'));
+                $this->content->text .= html_writer::link($att->url_manage(array('from' => 'block')),
+                                                                           get_string('takeattendance', 'attforblock'));
                 $this->content->text .= html_writer::empty_tag('br');
             }
             if ($att->perm->can_manage()) {
@@ -70,12 +95,17 @@ class block_attendance extends block_base {
             }
             $this->content->text .= "<br />";
         }
-		return $this->content;
-	}
+        return $this->content;
+    }
 
+    /**
+     * parses data to pass into construct.
+     * @param object $alldata
+     * @return array
+     */
     private function divide_databasetable_and_coursemodule_data($alldata) {
         static $cmfields;
-        
+
         if (!isset($cmfields)) {
             $cmfields = array(
                     'coursemodule' => 'id',
@@ -86,12 +116,14 @@ class block_attendance extends block_base {
                     'groupmembersonly' => 'groupmembersonly');
         }
 
-
         $atttable = new stdClass();
         $cm = new stdClass();
         foreach ($alldata as $field => $value) {
-            if (array_key_exists($field, $cmfields)) $cm->{$cmfields[$field]} = $value;
-            else $atttable->{$field} = $value;
+            if (array_key_exists($field, $cmfields)) {
+                $cm->{$cmfields[$field]} = $value;
+            } else {
+                $atttable->{$field} = $value;
+            }
         }
 
         $ret = new stdClass();
@@ -101,7 +133,11 @@ class block_attendance extends block_base {
         return $ret;
     }
 
-    function applicable_formats() {
+    /**
+     * Set the applicable formats for this block
+     * @return array
+     */
+    public function applicable_formats() {
         return array('all' => true, 'my' => false, 'admin' => false, 'tag' => false);
     }
 }

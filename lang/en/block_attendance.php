@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Language file for block "attendance"
+ *
+ * @package    block_attendance
+ * @copyright  2011 Artem Andreev <andreev.artem@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 $string['blockname'] = 'Attendance';
 $string['needactivity'] = 'This block can work only with an attendance activity. Please add the activity to this course.';
 $string['pluginname'] = 'Attendance';
