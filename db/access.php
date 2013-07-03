@@ -15,16 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * Attendance block caps.
  *
  * @package    block_attendance
  * @copyright  2011 Artem Andreev <andreev.artem@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->version = 2013070301;
-$plugin->requires = 2012120300;
-$plugin->component = 'block_attendance';
-$plugin->dependencies = array('mod_attendance' => 2012120700);
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '2.4';
+$capabilities = array(
+    'block/attendance:addinstance' => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+        'clonepermissionsfrom' => 'moodle/course:manageactivities'
+    ),
+);
