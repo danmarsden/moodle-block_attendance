@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Displays information about Attendance Module in this course.
- * 
+ *
  * @copyright  2011 Artem Andreev <andreev.artem@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -66,7 +66,7 @@ class block_attendance extends block_base {
 
         foreach ($attendances as $attinst) {
             $cmid = $attinst->coursemodule;
-            $context = get_context_instance(CONTEXT_MODULE, $cmid, MUST_EXIST);
+            $context =  context_module::instance($cmid, MUST_EXIST);
             $divided = $this->divide_databasetable_and_coursemodule_data($attinst);
 
             $att = new attforblock($divided->atttable, $divided->cm, $COURSE, $context);
