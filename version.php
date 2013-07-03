@@ -25,6 +25,6 @@
 $plugin->version = 2013070300;
 $plugin->requires = 2012120300;
 $plugin->component = 'block_attendance';
-$plugin->dependencies = array('mod_attforblock' => 2012120700);
+$plugin->dependencies = array('mod_attendance' => 2012120700);
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = '2.4';

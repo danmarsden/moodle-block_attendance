@@ -25,7 +25,7 @@ the attendance data. However, a student gets to see his attendance record.
 INSTALLATION
 ----------------
 The attendance follows standard installation procedures. Place the "attendance" directory in your blocks directory,
-"attforblock" directory in your mod directory. Please delete old language files from your moodledata/lang/en directory
+"attendance" directory in your mod directory. Please delete old language files from your moodledata/lang/en directory
 if you are upgrading the module. Then visit the Admin page in Moodle to activate it.
 
 --------------
