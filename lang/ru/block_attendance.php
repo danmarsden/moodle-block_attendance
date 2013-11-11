@@ -15,16 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * Language file for block "attendance"
  *
  * @package    block_attendance
  * @copyright  2011 Artem Andreev <andreev.artem@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->version = 2013070301;
-$plugin->requires = 2012120300;
-$plugin->component = 'block_attendance';
-$plugin->dependencies = array('mod_attendance' => 2013070400);
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '2.4';
+$string['blockname'] = 'Посещаемость';
+$string['needactivity'] = 'Данный блок работает только с элементом курса «Посещаемость». Пожалуйста, добавьте этот элемент курса.';
+$string['pluginname'] = 'Посещаемость';
