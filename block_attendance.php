@@ -66,6 +66,7 @@ class block_attendance extends block_base {
 
         foreach ($attendances as $attinst) {
             $cmid = $attinst->coursemodule;
+            $cm  = get_coursemodule_from_id('attendance', $cmid, $COURSE->id, false, MUST_EXIST);
             $context =  context_module::instance($cmid, MUST_EXIST);
             $divided = $this->divide_databasetable_and_coursemodule_data($attinst);
 
@@ -91,7 +92,7 @@ class block_attendance extends block_base {
             }
 
             if ($att->perm->can_be_listed() && $att->perm->can_view()) {
-                $this->content->text .= construct_full_user_stat_html_table($attinst, $COURSE, $USER);
+                $this->content->text .= construct_full_user_stat_html_table($attinst, $COURSE, $USER, $cm);
             }
             $this->content->text .= "<br />";
         }
