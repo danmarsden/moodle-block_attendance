@@ -22,9 +22,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->version = 2013070303;
+$plugin->version = 2015102800;
 $plugin->requires = 2012120300;
 $plugin->component = 'block_attendance';
 $plugin->dependencies = array('mod_attendance' => 2015092100);
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '2.9';
+$plugin->release   = '3.0';
