@@ -56,7 +56,7 @@ class block_attendance extends block_base {
         $this->content->text = '';
 
         $attendances = get_all_instances_in_course('attendance', $COURSE, null, true);
-        if (count($attendances)==0) {
+        if (count($attendances) == 0) {
              $this->content->text = get_string('needactivity', 'block_attendance');;
              return $this->content;
         }
@@ -67,7 +67,7 @@ class block_attendance extends block_base {
         foreach ($attendances as $attinst) {
             $cmid = $attinst->coursemodule;
             $cm  = get_coursemodule_from_id('attendance', $cmid, $COURSE->id, false, MUST_EXIST);
-            $context =  context_module::instance($cmid, MUST_EXIST);
+            $context = context_module::instance($cmid, MUST_EXIST);
             $divided = $this->divide_databasetable_and_coursemodule_data($attinst);
 
             $att = new attendance($divided->atttable, $divided->cm, $COURSE, $context);
