@@ -3,8 +3,8 @@
 The Attendance block supplements the Attendance activity and is supported and maintained by Dan Marsden http://danmarsden.com
 
 The Attendance block was previously developed by
-    Human Logic Development Team, www.human-logic.com
-    Dmitry Pupinin, Novosibirsk, Russia,
+* Human Logic Development Team, www.human-logic.com
+* Dmitry Pupinin, Novosibirsk, Russia,
     
 #PURPOSE
 The Attendance activity allows teachers to maintain a record of attendance, replacing or supplementing a paper-based attendance register.
