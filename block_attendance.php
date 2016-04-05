@@ -70,7 +70,7 @@ class block_attendance extends block_base {
             $context = context_module::instance($cmid, MUST_EXIST);
             $divided = $this->divide_databasetable_and_coursemodule_data($attinst);
 
-            $att = new attendance($divided->atttable, $divided->cm, $COURSE, $context);
+            $att = new mod_attendance_structure($divided->atttable, $divided->cm, $COURSE, $context);
 
             $this->content->text .= html_writer::link($att->url_view(), html_writer::tag('b', format_string($att->name)));
             $this->content->text .= html_writer::empty_tag('br');
@@ -84,7 +84,7 @@ class block_attendance extends block_base {
                 $this->content->text .= html_writer::empty_tag('br');
             }
             if (has_capability('mod/attendance:manageattendances', $context)) {
-                $url = $att->url_sessions(array('action' => att_sessions_page_params::ACTION_ADD));
+                $url = $att->url_sessions(array('action' => mod_attendance_sessions_page_params::ACTION_ADD));
                 $this->content->text .= html_writer::link($url, get_string('add', 'attendance'));
                 $this->content->text .= html_writer::empty_tag('br');
             }
