@@ -21,9 +21,14 @@ Feature: Test that teachers can add the attendance block and students can view r
         And I follow "Course 1"
         And I turn editing mode on
         And I add the "Attendance" block
-        Then I should see "Take Attendance"
+        Then I should see "Take attendance"
 
     Scenario: Students can view their reports.
-        When I log in as "student1"
+        When I log in as "teacher1"
+        And I follow "Course 1"
+        And I turn editing mode on
+        And I add the "Attendance" block
+        And I log out
+        And I log in as "student1"
         And I follow "Course 1"
         Then I should see "Sessions completed"
