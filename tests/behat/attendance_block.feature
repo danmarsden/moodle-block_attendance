@@ -15,7 +15,6 @@ Feature: Test that teachers can add the attendance block and students can view r
         And the following "activities" exist:
             | activity   | name                        | intro                              | course               | idnumber    |
             | attendance | AttendanceTest1             | attendance description             | C1                   | attendance1 |
-        And I log out
 
     Scenario: Teachers can add the attendance block
         When I log in as "teacher1"
