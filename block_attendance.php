@@ -95,7 +95,7 @@ class block_attendance extends block_base {
 
             if (has_capability('mod/attendance:canbelisted', $context, null, false) &&
                 has_capability('mod/attendance:view', $context)) {
-                $this->content->text .= construct_full_user_stat_html_table($attinst, $COURSE, $USER, $cm);
+                $this->content->text .= construct_full_user_stat_html_table($attinst, $USER);
             }
             $this->content->text .= "<br />";
         }
