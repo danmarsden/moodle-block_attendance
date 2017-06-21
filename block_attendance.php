@@ -102,7 +102,7 @@ class block_attendance extends block_base {
 
         $categorycontext = context_coursecat::instance($COURSE->category);
         if (has_capability('mod/attendance:viewsummaryreports', $categorycontext)) {
-            $url = new moodle_url('/mod/attendance/coursesummary.php', array('category' => $COURSE->category));
+            $url = new moodle_url('/mod/attendance/coursesummary.php', array('category' => $COURSE->category, 'fromcourse' => $COURSE->id));
             $this->content->text .= html_writer::link($url, get_string('categoryreport', 'attendance'));
             $this->content->text .= html_writer::empty_tag('br');
         }
