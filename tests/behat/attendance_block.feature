@@ -28,5 +28,5 @@ Feature: Test that teachers can add the attendance block and students can view r
     And I add the "Attendance" block
     And I log out
     And I log in as "student1"
-    And I follow "Course 1"
+    And I am on "Course 1" course homepage
     Then I should see "Taken sessions"
