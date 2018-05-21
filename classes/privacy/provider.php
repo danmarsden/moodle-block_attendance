@@ -15,18 +15,32 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * Privacy Subsystem implementation for block_attendance.
  *
  * @package    block_attendance
- * @copyright  2011 Artem Andreev <andreev.artem@gmail.com>
+ * @copyright  2018 Dan Marsden <dan@danmarsden.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace block_attendance\privacy;
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2018052100;
-$plugin->requires = 2017111300; // Requires 3.4.
-$plugin->component = 'block_attendance';
-$plugin->dependencies = array('mod_attendance' => 2017050208);
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '3.2.4';
+/**
+ * Privacy Subsystem for block_attendance implementing null_provider.
+ *
+ * @copyright  2018 Dan Marsden <dan@danmarsden.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}
