@@ -1,4 +1,4 @@
-#Moodle Attendance Block [![Build Status](https://travis-ci.org/danmarsden/moodle-block_attendance.svg?branch=master)](https://travis-ci.org/danmarsden/moodle-block_attendance)
+#Moodle Attendance Block [![Build Status](https://travis-ci.org/danmarsden/moodle-block_attendance.svg?branch=main)](https://travis-ci.org/danmarsden/moodle-block_attendance)
 
 The Attendance block supplements the Attendance activity and is supported and maintained by Dan Marsden http://danmarsden.com
 
