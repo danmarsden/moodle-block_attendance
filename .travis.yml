@@ -34,7 +34,7 @@ before_install:
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 install:
-  - moodle-plugin-ci add-plugin danmarsden/moodle-mod_attendance
+  - moodle-plugin-ci add-plugin --branch main danmarsden/moodle-mod_attendance
   - moodle-plugin-ci install
   - docker run -d -p 127.0.0.1:4444:4444 --net=host --shm-size=2g -v $HOME/build/moodle:$HOME/build/moodle selenium/standalone-chrome:3
 
