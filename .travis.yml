@@ -1,14 +1,12 @@
 language: php
 
-sudo: true
-
 addons:
-  firefox: "47.0.1"
-  postgresql: "9.3"
-  apt:
-    packages:
-      - oracle-java8-installer
-      - oracle-java8-set-default
+  postgresql: "9.5"
+
+services:
+  - mysql
+  - postgresql
+  - docker
 
 cache:
   directories:
@@ -16,25 +14,29 @@ cache:
     - $HOME/.npm
 
 php:
- - 7.0
- - 7.1
+  - 7.2
+  - 7.4
 
 env:
- matrix:
-  - DB=pgsql MOODLE_BRANCH=master
-  - DB=mysqli MOODLE_BRANCH=master
+  global:
+    - MOODLE_BRANCH=master
+    - MUSTACHE_IGNORE_NAMES=mobile_teacher_form.mustache
+  matrix:
+    - DB=pgsql
+    - DB=mysqli
 
 before_install:
   - phpenv config-rm xdebug.ini
-  - nvm install 8.9
-  - nvm use 8.9
+  - nvm install 14.0.0
+  - nvm use 14.0.0
   - cd ../..
-  - composer create-project -n --no-dev --prefer-dist moodlerooms/moodle-plugin-ci ci ^2
+  - composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci dev-master
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 install:
   - moodle-plugin-ci add-plugin danmarsden/moodle-mod_attendance
   - moodle-plugin-ci install
+  - docker run -d -p 127.0.0.1:4444:4444 --net=host --shm-size=2g -v $HOME/build/moodle:$HOME/build/moodle selenium/standalone-chrome:3
 
 script:
   - moodle-plugin-ci phplint
@@ -45,5 +47,6 @@ script:
   - moodle-plugin-ci savepoints
   - moodle-plugin-ci mustache
   - moodle-plugin-ci grunt
+  - moodle-plugin-ci phpdoc
   - moodle-plugin-ci phpunit
-  - moodle-plugin-ci behat
+  - moodle-plugin-ci behat --profile chrome
