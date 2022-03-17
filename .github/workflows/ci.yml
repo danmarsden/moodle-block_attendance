@@ -42,7 +42,7 @@ jobs:
       matrix:
         database: ['pgsql']
         moodle-branch: ['MOODLE_38_STABLE', 'MOODLE_311_STABLE']
-        php: ['7.2', '7.4']
+        php: ['7.4']
 
     steps:
       - name: Check out repository code
