@@ -24,8 +24,6 @@
 
 namespace block_attendance\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy Subsystem for block_attendance implementing null_provider.
  *
