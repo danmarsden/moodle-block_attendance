@@ -103,13 +103,14 @@ class block_attendance extends block_base {
             }
             $this->content->text .= "<br />";
         }
-
-        $categorycontext = context_coursecat::instance($COURSE->category);
-        if (has_capability('mod/attendance:viewsummaryreports', $categorycontext)) {
-            $url = new moodle_url('/mod/attendance/coursesummary.php',
-                array('category' => $COURSE->category, 'fromcourse' => $COURSE->id));
-            $this->content->text .= html_writer::link($url, get_string('categoryreport', 'attendance'));
-            $this->content->text .= html_writer::empty_tag('br');
+        if ($COURSE->id !== SITEID) { // Don't show course categories on site homepage.
+            $categorycontext = context_coursecat::instance($COURSE->category);
+            if (has_capability('mod/attendance:viewsummaryreports', $categorycontext)) {
+                $url = new moodle_url('/mod/attendance/coursesummary.php',
+                    array('category' => $COURSE->category, 'fromcourse' => $COURSE->id));
+                $this->content->text .= html_writer::link($url, get_string('categoryreport', 'attendance'));
+                $this->content->text .= html_writer::empty_tag('br');
+            }
         }
 
         return $this->content;
