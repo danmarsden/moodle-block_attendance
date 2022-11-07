@@ -43,7 +43,7 @@ class block_attendance extends block_base {
      * @return object $this->content
      */
     public function get_content() {
-        global $CFG, $USER, $COURSE;
+        global $CFG, $USER, $COURSE, $DB;
 
         if ($this->content !== null) {
             return $this->content;
@@ -70,9 +70,9 @@ class block_attendance extends block_base {
                 continue;
             }
             $context = context_module::instance($cmid, MUST_EXIST);
-            $divided = $this->divide_databasetable_and_coursemodule_data($attinst);
+            $attendance = $DB->get_record('attendance', ['id' => $cm->instance], '*', MUST_EXIST);
 
-            $att = new mod_attendance_structure($divided->atttable, $divided->cm, $COURSE, $context);
+            $att = new mod_attendance_structure($attendance, $cm, $COURSE, $context);
 
             $this->content->text .= html_writer::link($att->url_view(), html_writer::tag('b', format_string($att->name)));
             $this->content->text .= html_writer::empty_tag('br');
@@ -112,41 +112,6 @@ class block_attendance extends block_base {
         }
 
         return $this->content;
-    }
-
-    /**
-     * parses data to pass into construct.
-     * @param object $alldata
-     * @return array
-     */
-    private function divide_databasetable_and_coursemodule_data($alldata) {
-        static $cmfields;
-
-        if (!isset($cmfields)) {
-            $cmfields = array(
-                    'coursemodule' => 'id',
-                    'section' => 'section',
-                    'visible' => 'visible',
-                    'groupmode' => 'groupmode',
-                    'groupingid' => 'groupingid',
-                    'groupmembersonly' => 'groupmembersonly');
-        }
-
-        $atttable = new stdClass();
-        $cm = new stdClass();
-        foreach ($alldata as $field => $value) {
-            if (array_key_exists($field, $cmfields)) {
-                $cm->{$cmfields[$field]} = $value;
-            } else {
-                $atttable->{$field} = $value;
-            }
-        }
-
-        $ret = new stdClass();
-        $ret->atttable = $atttable;
-        $ret->cm = $cm;
-
-        return $ret;
     }
 
     /**
