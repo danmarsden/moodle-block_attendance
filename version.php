@@ -24,9 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2022031800;
+$plugin->version = 2022112500;
 $plugin->requires = 2017111300; // Requires 3.4.
 $plugin->component = 'block_attendance';
 $plugin->dependencies = array('mod_attendance' => 2017050208);
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '3.2.5';
+$plugin->release   = '3.2.6';
