@@ -4,5 +4,42 @@ name: ci
 on: [push, pull_request]
 
 jobs:
-  ci:
+  moodle41:
     uses: catalyst/catalyst-moodle-workflows/.github/workflows/ci.yml@main
+    with:
+      disable_phpunit: true
+      moodle_branches: MOODLE_401_STABLE
+      extra_plugin_runners:
+        moodle-plugin-ci add-plugin danmarsden/moodle-mod_attendance --branch MOODLE_401_STABLE
+
+  moodle42:
+    uses: catalyst/catalyst-moodle-workflows/.github/workflows/ci.yml@main
+    with:
+      disable_phpunit: true
+      moodle_branches: MOODLE_402_STABLE
+      extra_plugin_runners:
+        moodle-plugin-ci add-plugin danmarsden/moodle-mod_attendance --branch MOODLE_402_STABLE
+
+  moodle43:
+    uses: catalyst/catalyst-moodle-workflows/.github/workflows/ci.yml@main
+    with:
+      disable_phpunit: true
+      moodle_branches: MOODLE_403_STABLE
+      extra_plugin_runners:
+        moodle-plugin-ci add-plugin danmarsden/moodle-mod_attendance --branch MOODLE_403_STABLE
+
+  moodle44:
+    uses: catalyst/catalyst-moodle-workflows/.github/workflows/ci.yml@main
+    with:
+      disable_phpunit: true
+      moodle_branches: MOODLE_404_STABLE
+      extra_plugin_runners:
+        moodle-plugin-ci add-plugin danmarsden/moodle-mod_attendance --branch MOODLE_404_STABLE
+
+  moodle45:
+    uses: catalyst/catalyst-moodle-workflows/.github/workflows/ci.yml@main
+    with:
+      disable_phpunit: true
+      moodle_branches: MOODLE_405_STABLE
+      extra_plugin_runners:
+        moodle-plugin-ci add-plugin danmarsden/moodle-mod_attendance --branch MOODLE_404_STABLE
