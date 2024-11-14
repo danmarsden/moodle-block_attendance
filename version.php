@@ -30,3 +30,4 @@ $plugin->component = 'block_attendance';
 $plugin->dependencies = array('mod_attendance' => 2017050208);
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = '3.2.6';
+$plugin->supported = [401, 405];
