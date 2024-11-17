@@ -42,4 +42,4 @@ jobs:
       disable_phpunit: true
       moodle_branches: MOODLE_405_STABLE
       extra_plugin_runners:
-        moodle-plugin-ci add-plugin danmarsden/moodle-mod_attendance --branch MOODLE_404_STABLE
+        moodle-plugin-ci add-plugin danmarsden/moodle-mod_attendance --branch MOODLE_405_STABLE
