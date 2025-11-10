@@ -24,10 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025111000;
-$plugin->release   = '2025111000';
-$plugin->requires = 2024100707; // Requires 4.5.
+$plugin->version = 2025111200;
+$plugin->release   = '2025111200';
+$plugin->requires = 2025041400; // Requires 5.0
 $plugin->component = 'block_attendance';
-$plugin->dependencies = ['mod_attendance' => 2024072401];
+$plugin->dependencies = ['mod_attendance' => 2025111000];
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->supported = [405, 501];
+$plugin->supported = [500, 501];

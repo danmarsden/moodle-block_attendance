@@ -59,7 +59,6 @@ class block_attendance extends block_base {
         }
 
         require_once($CFG->dirroot . '/mod/attendance/locallib.php');
-        require_once($CFG->dirroot . '/mod/attendance/renderhelpers.php');
 
         foreach ($attendances as $attinst) {
             $cmid = $attinst->coursemodule;
@@ -102,7 +101,8 @@ class block_attendance extends block_base {
                 has_capability('mod/attendance:canbelisted', $context, null, false) &&
                 has_capability('mod/attendance:view', $context)
             ) {
-                $this->content->text .= construct_full_user_stat_html_table($attinst, $USER);
+                $summary = new mod_attendance_summary($attinst->id, $USER->id);
+                $this->content->text .= attendance_construct_user_data_stat($summary->get_all_sessions_summary_for($USER->id), ATT_VIEW_ALL);
             }
             $this->content->text .= "<br />";
         }

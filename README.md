@@ -8,6 +8,7 @@ The following git branches are supported:
 
 | Moodle version        | Branch            |
 |-----------------------|-------------------|
+| Moodle 5.0 and higher | MOODLE_500_STABLE |
 | Moodle 4.5 and higher | MOODLE_405_STABLE |
  
 #PURPOSE
