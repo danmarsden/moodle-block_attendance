@@ -29,7 +29,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_attendance extends block_base {
-
     /**
      * Set the initial properties for the block
      */
@@ -49,18 +48,18 @@ class block_attendance extends block_base {
             return $this->content;
         }
 
-        $this->content = new stdClass;
+        $this->content = new stdClass();
         $this->content->footer = '';
         $this->content->text = '';
 
         $attendances = get_all_instances_in_course('attendance', $COURSE, null, true);
         if (count($attendances) == 0) {
-             $this->content->text = get_string('needactivity', 'block_attendance');;
+             $this->content->text = get_string('needactivity', 'block_attendance');
              return $this->content;
         }
 
-        require_once($CFG->dirroot.'/mod/attendance/locallib.php');
-        require_once($CFG->dirroot.'/mod/attendance/renderhelpers.php');
+        require_once($CFG->dirroot . '/mod/attendance/locallib.php');
+        require_once($CFG->dirroot . '/mod/attendance/renderhelpers.php');
 
         foreach ($attendances as $attinst) {
             $cmid = $attinst->coursemodule;
@@ -79,14 +78,18 @@ class block_attendance extends block_base {
 
             // Link to attendance.
 
-            if (has_capability('mod/attendance:takeattendances', $context) or
-                has_capability('mod/attendance:changeattendances', $context)) {
-                $this->content->text .= html_writer::link($att->url_manage(array('from' => 'block')),
-                                                                           get_string('takeattendance', 'attendance'));
+            if (
+                has_capability('mod/attendance:takeattendances', $context) or
+                has_capability('mod/attendance:changeattendances', $context)
+            ) {
+                $this->content->text .= html_writer::link(
+                    $att->url_manage(['from' => 'block']),
+                    get_string('takeattendance', 'attendance')
+                );
                 $this->content->text .= html_writer::empty_tag('br');
             }
             if (has_capability('mod/attendance:manageattendances', $context)) {
-                $url = $att->url_sessions(array('action' => mod_attendance_sessions_page_params::ACTION_ADD));
+                $url = $att->url_sessions(['action' => mod_attendance_sessions_page_params::ACTION_ADD]);
                 $this->content->text .= html_writer::link($url, get_string('add', 'attendance'));
                 $this->content->text .= html_writer::empty_tag('br');
             }
@@ -95,8 +98,10 @@ class block_attendance extends block_base {
                 $this->content->text .= html_writer::empty_tag('br');
             }
 
-            if (has_capability('mod/attendance:canbelisted', $context, null, false) &&
-                has_capability('mod/attendance:view', $context)) {
+            if (
+                has_capability('mod/attendance:canbelisted', $context, null, false) &&
+                has_capability('mod/attendance:view', $context)
+            ) {
                 $this->content->text .= construct_full_user_stat_html_table($attinst, $USER);
             }
             $this->content->text .= "<br />";
@@ -104,8 +109,10 @@ class block_attendance extends block_base {
         if ($COURSE->id !== SITEID) { // Don't show course categories on site homepage.
             $categorycontext = context_coursecat::instance($COURSE->category);
             if (has_capability('mod/attendance:viewsummaryreports', $categorycontext)) {
-                $url = new moodle_url('/mod/attendance/coursesummary.php',
-                    array('category' => $COURSE->category, 'fromcourse' => $COURSE->id));
+                $url = new moodle_url(
+                    '/mod/attendance/coursesummary.php',
+                    ['category' => $COURSE->category, 'fromcourse' => $COURSE->id]
+                );
                 $this->content->text .= html_writer::link($url, get_string('categoryreport', 'attendance'));
                 $this->content->text .= html_writer::empty_tag('br');
             }
@@ -119,6 +126,6 @@ class block_attendance extends block_base {
      * @return array
      */
     public function applicable_formats() {
-        return array('all' => true, 'my' => false, 'admin' => false, 'tag' => false);
+        return ['all' => true, 'my' => false, 'admin' => false, 'tag' => false];
     }
 }
