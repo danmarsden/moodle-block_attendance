@@ -53,9 +53,26 @@ class block_attendance extends block_base {
         $this->content->text = '';
 
         $attendances = get_all_instances_in_course('attendance', $COURSE, null, true);
-        if (count($attendances) == 0) {
-             $this->content->text = get_string('needactivity', 'block_attendance');
-             return $this->content;
+
+        // Remove hidden attendances if user does not have capability to view them.
+        $attendanceshidden = false;
+        foreach ($attendances as $key => $attinst) {
+            if (
+                empty($attinst->visible)
+                && !has_capability('moodle/course:viewhiddenactivities', context_course::instance($COURSE->id))
+            ) {
+                unset($attendances[$key]);
+                $attendanceshidden = true;
+            }
+        }
+
+        if (count($attendances) === 0) {
+            // Display message if there are actually no attendances in the course
+            // otherwise display nothing if they were all hidden from the user.
+            if (!$attendanceshidden) {
+                $this->content->text = get_string('needactivity', 'block_attendance');
+            }
+            return $this->content;
         }
 
         require_once($CFG->dirroot . '/mod/attendance/locallib.php');
